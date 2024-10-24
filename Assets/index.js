@@ -1,5 +1,3 @@
-
-
 const cityInput = document.querySelector('.city-input');
 const searchButton = document.querySelector(".search-btn");
 const weatherCardsDiv = document.querySelector(".weather-cards");
@@ -90,7 +88,7 @@ const saveSearchHistory = (cityName) => {
 
 const loadSearchHistory = () => {
   let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
-  const historyDiv = document.querySelector('.search-history');
+  
   searchHistory.forEach(city => {
     const cityElement = document.createElement('div');
     cityElement.textContent = city;
@@ -99,7 +97,6 @@ const loadSearchHistory = () => {
       cityInput.value = city;
       getCityCoordinates();
     });
-    historyDiv.appendChild(cityElement);
   });
 };
 
