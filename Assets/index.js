@@ -7,7 +7,7 @@ const API_KEY = "9e0ff449d6ecb431c7f03daa438e872f";
 const createWeatherCard = (cityName, weatherItem, index) => {
   if(index === 0) {
     return `<div class="details">
-                <h2>${cityName}(${weatherItem.dt_txt.split("")[0]})</h2>
+                <h2>${cityName}(${weatherItem.dt_txt.split("mm-dd-yyyy")[0]})</h2>
                <h4>Temperature:${weatherItem.main.temp}</h4>
             <h4>Wind:${weatherItem.wind.speed}</h4>
             <h4>Humidity:${weatherItem.main.humidity}</h4>;
@@ -20,7 +20,7 @@ const createWeatherCard = (cityName, weatherItem, index) => {
               </div>`
   } else{
   return `<li class="card">
-            <h3>${weatherItem.dt_txt.split("")[0]}</h3>
+            <h3>${weatherItem.dt_txt.split("mm-dd-yyyy")[0]}</h3>
             <img src="https://openweathermap.org/img/wn/${weatherItem.weather[0].icon}@2x.png" alt="weather-icons">
             <h4>Temperature:${weatherItem.main.temp}</h4>
             <h4>Wind:${weatherItem.wind.speed}</h4>
@@ -39,7 +39,7 @@ const getWeatherDetails = (cityName, lat, lon) =>{
     const uniqueForecastDays = [];
 
     const fiveDayForecast = data.list.filter(forecast => {
-    const forecastDate = new Date(forecast.dt_txt).getDate();
+    const forecastDate = new Date(forecast.dt_txt).getDay();
     if(!uniqueForecastDays.includes(forecastDate)){
       return uniqueForecastDays.push(forecastDate)
     }
@@ -88,7 +88,6 @@ const saveSearchHistory = (cityName) => {
 
 const loadSearchHistory = () => {
   let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
-  
   searchHistory.forEach(city => {
     const cityElement = document.createElement('div');
     cityElement.textContent = city;
