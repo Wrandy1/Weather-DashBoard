@@ -91,7 +91,6 @@ const saveSearchHistory = (cityName) => {
 const loadSearchHistory = () => {
   let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
   const historyDiv = document.querySelector('.search-history');
-  historyDiv.innerHTML = '';
   searchHistory.forEach(city => {
     const cityElement = document.createElement('div');
     cityElement.textContent = city;
